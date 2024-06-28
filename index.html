@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Info</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>WORD FREQUENCY DICTIONARY</h1>
+        <form method="POST">
+            <input type="text" name="word" placeholder="Enter  a word...">
+            <button type="submit">Search</button>
+        </form>
+
+        {% if word %}
+            <div class="results">
+                <h2>Your searching word is "{{ word }}"</h2>
+
+                <h3>Antonyms</h3>
+                <ul>
+                    {% if antonyms %}
+                        {% for antonym in antonyms %}
+                            <li>{{ antonym }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No antonyms found</li>
+                    {% endif %}
+                </ul>
+
+                <h3>Synonyms</h3>
+                <ul>
+                    {% if synonyms %}
+                        {% for synonym in synonyms %}
+                            <li>{{ synonym }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No synonyms found</li>
+                    {% endif %}
+                </ul>
+
+                <h3>Meaning</h3>
+                <ul>
+                    {% if meaning %}
+                        {% for part_of_speech, definitions in meaning.items() %}
+                            <li><strong>{{ part_of_speech }}</strong>:
+                                <ul>
+                                    {% for definition in definitions %}
+                                        <li>{{ definition }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No meaning found</li>
+                    {% endif %}
+                </ul>
+
+                <h3>Tamil Translation</h3>
+                <ul>
+                    {% if translation %}
+                        <li>{{ translation }}</li>
+                    {% else %}
+                        <li>No translation found</li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
